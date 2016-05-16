@@ -1,4 +1,4 @@
-package com.spt.vo;
+package com.ppk.entities;
 
 import java.util.Map;
 
@@ -15,12 +15,9 @@ public class SptRibbonRequest {
 	private String authHeaderParameter;
 	private Object postBody;
 
-	public static SptRibbonRequest getRibbonRequest(String resourceGroupName,
-			String commaSeparatedServerList, String templateName,
-			String uriTemplate, String maxRetry, String httpMethod,
-			Map<String, String> headerMap,
-			Map<String, String> pathVariablesMap, String authHeaderParameter,
-			Object postBody) {
+	public static SptRibbonRequest getRibbonRequest(String resourceGroupName, String commaSeparatedServerList,
+			String templateName, String uriTemplate, String maxRetry, String httpMethod, Map<String, String> headerMap,
+			Map<String, String> pathVariablesMap, String authHeaderParameter, Object postBody) {
 		SptRibbonRequest ribbonRequestVO = new SptRibbonRequest();
 		ribbonRequestVO.setResourceGroupName(resourceGroupName);
 		ribbonRequestVO.setCommaSeparatedServerList(commaSeparatedServerList);

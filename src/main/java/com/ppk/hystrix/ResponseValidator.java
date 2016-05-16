@@ -1,4 +1,4 @@
-package com.spt.hystrix;
+package com.ppk.hystrix;
 
 import io.netty.buffer.ByteBuf;
 import io.reactivex.netty.protocol.http.client.HttpClientResponse;
