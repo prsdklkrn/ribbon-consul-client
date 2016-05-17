@@ -32,16 +32,16 @@ public class RegisterService {
 	}
 
 	@PostConstruct
-	public void registerConsul(ConsulClient consulClient) throws UnknownHostException, MalformedObjectNameException {
+	public void registerConsul() throws UnknownHostException, MalformedObjectNameException {
 		System.out.println("Registering service..");
 		String ipaddress = InetAddress.getLocalHost().getHostAddress();
 		System.out.println("Registering service - " + consulProperties.getRegisterServiceName());
 		NewService newService = new NewService();
 		newService.setName(consulProperties.getRegisterServiceName());
-		newService.setPort(consulProperties.getConsulServerPort());
+		newService.setPort(consulProperties.getServerPort());
 		System.out.println("Host address-->> " + ipaddress);
 		Check check = new Check();
-		check.setHttp("http://127.0.0.1:" + consulProperties.getConsulServerPort()
+		check.setHttp("http://127.0.0.1:" + consulProperties.getServerPort() + consulProperties.getServerContextPath()
 				+ consulProperties.getConsulHealthEndpoint());
 		check.setInterval(consulProperties.getConsulHealthCheckInterval());
 		newService.setCheck(check);

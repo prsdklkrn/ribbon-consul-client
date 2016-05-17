@@ -15,12 +15,12 @@ public class ConsulProperties {
 
 	private final String	environment;
 	private final String	consulServerHost;
-	private final Integer	consulServerPort;
+	private final Integer	serverPort;
 	private final String	consulHealthEndpoint;
 	private final String	consulHealthCheckInterval;
 	private final String	consulAjpPortKey;
 	private final String	consulHttpPortKey;
-	private final String	consulContextPathKey;
+	private final String	serverContextPath;
 	private final String	consulKeyFolderPath;
 	private final String	registerServiceName;
 
@@ -28,22 +28,22 @@ public class ConsulProperties {
 	public ConsulProperties(
 			@Value("${ppk.env}") String environment,
 			@Value("${consul.server.host:localhost}") String consulServerHost,
-			@Value("${consul.server.port:8500}") Integer consulServerPort,
+			@Value("${server.port}") Integer serverPort,
 			@Value("${consul.health.check.endpoint:/health}") String consulHealthEndpoint,
 			@Value("${consul.health.check.interval:10s}") String consulHealthCheckInterval,
 			@Value("${consul.keys.ajp.port}") String consulAjpPortKey,
 			@Value("${consul.keys.http.port}") String consulHttpPortKey,
-			@Value("${consul.keys.context.path}") String consulContextPathKey,
+			@Value("${server.contextPath}") String serverContextPath,
 			@Value("${consul.keys.base.folder}") String consulKeyFolderPath,
-			String registerServiceName) {
+			@Value("${consul.register.service.name}") String registerServiceName) {
 		this.environment = environment;
 		this.consulServerHost = consulServerHost;
-		this.consulServerPort = consulServerPort;
+		this.serverPort = serverPort;
 		this.consulHealthEndpoint = consulHealthEndpoint;
 		this.consulHealthCheckInterval = consulHealthCheckInterval;
 		this.consulAjpPortKey = consulAjpPortKey;
 		this.consulHttpPortKey = consulHttpPortKey;
-		this.consulContextPathKey = consulContextPathKey;
+		this.serverContextPath = serverContextPath;
 		this.consulKeyFolderPath = consulKeyFolderPath;
 		this.registerServiceName = registerServiceName;
 	}
@@ -56,8 +56,8 @@ public class ConsulProperties {
 		return consulServerHost;
 	}
 
-	public Integer getConsulServerPort() {
-		return consulServerPort;
+	public Integer getServerPort() {
+		return serverPort;
 	}
 
 	public String getConsulHealthEndpoint() {
@@ -76,8 +76,8 @@ public class ConsulProperties {
 		return consulHttpPortKey;
 	}
 
-	public String getConsulContextPathKey() {
-		return consulContextPathKey;
+	public String getServerContextPath() {
+		return serverContextPath;
 	}
 
 	public String getConsulKeyFolderPath() {

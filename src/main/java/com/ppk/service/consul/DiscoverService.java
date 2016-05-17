@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -12,6 +13,7 @@ import com.ecwid.consul.v1.ConsulClient;
 import com.ecwid.consul.v1.catalog.model.CatalogService;
 import com.ppk.consul.config.ConsulProperties;
 
+@ConditionalOnProperty(name = "consul.register.service.enabled", havingValue = "true")
 @Service
 public class DiscoverService {
 
