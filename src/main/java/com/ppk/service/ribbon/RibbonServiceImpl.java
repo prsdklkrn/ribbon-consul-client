@@ -18,7 +18,7 @@ import com.netflix.ribbon.RibbonRequest;
 import com.netflix.ribbon.http.HttpRequestBuilder;
 import com.netflix.ribbon.http.HttpRequestTemplate;
 import com.netflix.ribbon.http.HttpRequestTemplate.Builder;
-import com.ppk.entities.SptRibbonRequest;
+import com.ppk.entities.RibbonClientRequest;
 import com.ppk.hystrix.ResponseValidator;
 import com.ppk.hystrix.SptFallbackHandler;
 import com.netflix.ribbon.http.HttpResourceGroup;
@@ -34,7 +34,7 @@ import rx.Subscriber;
 public class RibbonServiceImpl implements RibbonService {
 
 	@Override
-	public <T> Observable<T> getRibbonRequestObservable(final SptRibbonRequest sptRibbonRequest,
+	public <T> Observable<T> getRibbonRequestObservable(final RibbonClientRequest sptRibbonRequest,
 			final TypeReference<T> type) {
 		Observable<T> ribbonObservable = Observable.create(new Observable.OnSubscribe<T>() {
 			@Override
@@ -73,7 +73,7 @@ public class RibbonServiceImpl implements RibbonService {
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public HttpRequestTemplate<ByteBuf> httpGETLoadBalancer(SptRibbonRequest sptRibbonRequest) {
+	public HttpRequestTemplate<ByteBuf> httpGETLoadBalancer(RibbonClientRequest sptRibbonRequest) {
 		HttpResourceGroup httpResourceGroup = Ribbon.createHttpResourceGroup(sptRibbonRequest.getResourceGroupName(),
 				ClientOptions.create()
 						.withMaxAutoRetriesNextServer(Integer.valueOf(sptRibbonRequest.getMaxAutoRetryForNextServe()))
@@ -88,7 +88,8 @@ public class RibbonServiceImpl implements RibbonService {
 
 	}
 
-	public RibbonRequest<ByteBuf> getRibbonRequest(SptRibbonRequest sptRibbonRequest) throws JsonProcessingException {
+	public RibbonRequest<ByteBuf> getRibbonRequest(RibbonClientRequest sptRibbonRequest)
+			throws JsonProcessingException {
 		HttpRequestTemplate<ByteBuf> ribbonRequestTemplate = httpGETLoadBalancer(sptRibbonRequest);
 		HttpRequestBuilder<ByteBuf> ribbonRequestBuilder = ribbonRequestTemplate.requestBuilder();
 		updateRequestProperties(ribbonRequestBuilder, sptRibbonRequest);
@@ -97,7 +98,7 @@ public class RibbonServiceImpl implements RibbonService {
 	}
 
 	private void updateRequestProperties(HttpRequestBuilder<ByteBuf> ribbonRequestBuilder,
-			SptRibbonRequest sptRibbonRequest) throws JsonProcessingException {
+			RibbonClientRequest sptRibbonRequest) throws JsonProcessingException {
 		if (sptRibbonRequest != null && (sptRibbonRequest.getPathVariablesMap() != null
 				&& sptRibbonRequest.getPathVariablesMap().size() > 0)) {
 			for (Map.Entry<String, String> entry : sptRibbonRequest.getPathVariablesMap().entrySet()) {

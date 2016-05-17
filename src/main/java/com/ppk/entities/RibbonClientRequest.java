@@ -2,28 +2,28 @@ package com.ppk.entities;
 
 import java.util.Map;
 
-public class SptRibbonRequest {
+public class RibbonClientRequest {
 
-	private String resourceGroupName;
-	private String commaSeparatedServerList;
-	private String templateName;
-	private String templateURI;
-	private int maxAutoRetryForNextServe;
-	private Map<String, String> headerMap;
-	private String httpMethod;
-	private Map<String, String> pathVariablesMap;
-	private String authHeaderParameter;
-	private Object postBody;
+	private String				resourceGroupName;
+	private String				commaSeparatedServerList;
+	private String				templateName;
+	private String				templateURI;
+	private int					maxAutoRetryForNextServe;
+	private Map<String, String>	headerMap;
+	private String				httpMethod;
+	private Map<String, String>	pathVariablesMap;
+	private String				authHeaderParameter;
+	private Object				postBody;
 
-	public static SptRibbonRequest getRibbonRequest(String resourceGroupName, String commaSeparatedServerList,
-			String templateName, String uriTemplate, String maxRetry, String httpMethod, Map<String, String> headerMap,
+	public static RibbonClientRequest getRibbonRequest(String resourceGroupName, String commaSeparatedServerList,
+			String templateName, String uriTemplate, Integer maxRetry, String httpMethod, Map<String, String> headerMap,
 			Map<String, String> pathVariablesMap, String authHeaderParameter, Object postBody) {
-		SptRibbonRequest ribbonRequestVO = new SptRibbonRequest();
+		RibbonClientRequest ribbonRequestVO = new RibbonClientRequest();
 		ribbonRequestVO.setResourceGroupName(resourceGroupName);
 		ribbonRequestVO.setCommaSeparatedServerList(commaSeparatedServerList);
 		ribbonRequestVO.setTemplateName(templateName);
 		ribbonRequestVO.setTemplateURI(uriTemplate);
-		ribbonRequestVO.setMaxAutoRetryForNextServe(Integer.parseInt(maxRetry));
+		ribbonRequestVO.setMaxAutoRetryForNextServe(maxRetry);
 		ribbonRequestVO.setHttpMethod(httpMethod);
 		ribbonRequestVO.setHeaderMap(headerMap);
 		ribbonRequestVO.setPathVariablesMap(pathVariablesMap);
